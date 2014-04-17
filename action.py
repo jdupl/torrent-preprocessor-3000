@@ -99,14 +99,16 @@ def main():
             print_help()
             exit(1)
 
-    move_size = get_total_size(os.path.join(torrent_path, torrent_name))
+    
     start_time = current_millis()
 
     if os.path.isfile(os.path.join(torrent_path)):
         # torrent is a single file
+        move_size = get_total_size(torrent_path, torrent_name)
         copyfile(torrent_path, os.path.join(DESTINATION, torrent_name))
     elif os.path.isdir(os.path.join(torrent_path, torrent_name)):
         # torrent is a directory torrent_path + torrent_name
+        move_size = get_total_size(os.path.join(torrent_path, torrent_name))
         copydir(os.path.join(torrent_path, torrent_name), os.path.join(DESTINATION, torrent_name))
     # get elapsed time in seconds
     elapsed = (current_millis() - start_time) / 1000.0
