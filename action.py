@@ -11,6 +11,7 @@ LOG_FILE = "CHANGE ME"
 
 current_millis = lambda: int(round(time.time() * 1000))
 
+
 def print_help():
     log("Usage:%s 'torrentName' 'torrentPath'" % sys.argv[0])
     log("OR")
@@ -76,7 +77,8 @@ def main():
         log("torrent name %s" % torrent_name)  # debug
         log("torrent path %s" % torrent_path)  # debug
     else:
-        # mostly due to qbittorrent handicap with double quotes and torrents names having spaces,
+        # mostly due to qbittorrent handicap with double quotes and torrents
+        # names having spaces,
         # this is necessary... Sadly. Feel free to think of another way
         tmpArgs = sys.argv
         tmpArgs[0] = ""
@@ -86,7 +88,6 @@ def main():
         torrent_path = array[1].strip()
         log("torrent name %s" % torrent_name)  # debug
         log("torrent path %s" % torrent_path)  # debug
-
 
         if len(array) == 2:
             torrent_name = array[0].strip()
@@ -98,7 +99,7 @@ def main():
             log(array)  # debug
             print_help()
             exit(1)
-    
+
     start_time = current_millis()
 
     if os.path.isfile(torrent_path):
@@ -108,14 +109,16 @@ def main():
     elif os.path.isdir(os.path.join(torrent_path, torrent_name)):
         # torrent is a directory torrent_path + torrent_name
         move_size = get_total_size(os.path.join(torrent_path, torrent_name))
-        copydir(os.path.join(torrent_path, torrent_name), os.path.join(DESTINATION, torrent_name))
+        copydir(os.path.join(torrent_path, torrent_name),
+             os.path.join(DESTINATION, torrent_name))
     else:
         log("Your file/directory could not be found !")
         exit(2)
     # get elapsed time in seconds
     elapsed = (current_millis() - start_time) / 1000.0
     speed = "%s/s" % human_readable(move_size / elapsed)
-    log("Moved %s in %.2f seconds. Speed: %s" % (human_readable(move_size), elapsed, speed))
+    log("Moved %s in %.2f seconds. Speed: %s" %
+    (human_readable(move_size), elapsed, speed))
 
 
 if __name__ == "__main__":
