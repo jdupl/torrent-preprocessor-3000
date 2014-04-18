@@ -103,10 +103,9 @@ def main():
     start_time = current_millis()
 
     if os.path.isfile(torrent_name):
-        # qbittorrent is stupid... name is path and path is name when it is a file
         # torrent is a single file
-        move_size = get_total_size(torrent_name)
-        copyfile(torrent_name, os.path.join(DESTINATION, torrent_path))
+        move_size = get_total_size(torrent_path)
+        copyfile(torrent_path, os.path.join(DESTINATION, torrent_name))
     elif os.path.isdir(os.path.join(torrent_path, torrent_name)):
         # torrent is a directory torrent_path + torrent_name
         move_size = get_total_size(os.path.join(torrent_path, torrent_name))
