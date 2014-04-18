@@ -20,7 +20,7 @@ def print_help():
 # returns size of tree/file in bytes
 def get_total_size(source):
     total_size = os.path.getsize(source)
-    if os.path_isdir(source):
+    if os.path.isdir(source):
         for item in os.listdir(source):
             item_path = os.path.join(source, item)
             if os.path.isfile(item_path):
@@ -102,10 +102,11 @@ def main():
     
     start_time = current_millis()
 
-    if os.path.isfile(os.path.join(torrent_path)):
-        # torrent is a single file -> torrent_path
-        move_size = get_total_size(torrent_path)
-        copyfile(torrent_path, os.path.join(DESTINATION, torrent_name))
+    if os.path.isfile(torrent_name):
+        # qbittorrent is stupid... name is path and path is name when it is a file
+        # torrent is a single file
+        move_size = get_total_size(torrent_name)
+        copyfile(torrent_name, os.path.join(DESTINATION, torrent_path))
     elif os.path.isdir(os.path.join(torrent_path, torrent_name)):
         # torrent is a directory torrent_path + torrent_name
         move_size = get_total_size(os.path.join(torrent_path, torrent_name))
