@@ -98,11 +98,10 @@ def main():
             log(array)  # debug
             print_help()
             exit(1)
-
     
     start_time = current_millis()
 
-    if os.path.isfile(torrent_name):
+    if os.path.isfile(torrent_path):
         # torrent is a single file
         move_size = get_total_size(torrent_path)
         copyfile(torrent_path, os.path.join(DESTINATION, torrent_name))
