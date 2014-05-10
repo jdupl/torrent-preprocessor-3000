@@ -7,6 +7,13 @@ A small script/program to ensure torrents from a server are transfered/copied to
 
 Copy the python file on your server and make it excutable with `chmod o+x /path/to/myfile.py`.
 
+Edit the following lines of the new file 
+```
+DESTINATION = "CHANGE ME"
+LOG_FILE = "CHANGE ME"
+
+```
+
 
 ### Deluge webui
 
